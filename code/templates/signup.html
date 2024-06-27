@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Sign up</title>
+    <link rel="icon" href="{% static 'assets/icon/icon.ico' %}">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aguafina+Script">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa+Slab+One">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arizonia">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/simple-line-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Add-Another-Button.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Navigation-with-Search.css' %}">
+ 
+</head>
+
+<body>
+    <div id="page-top"></div>
+    <section class="login-clean" style="background: url(&quot;{% static 'assets/img/portfolio-1.jpg' %}&quot;);background-size: cover;">
+        <form method="post">
+            {% csrf_token %}
+            <h2 class="visually-hidden">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-location-outline" style="background: var(--bs-light);border-color: var(--bs-warning);color: var(--bs-blue);"></i></div>
+            {% if errmsg1 %} <div style='color:red;'>{{ errmsg1 }}</div> {% endif %}
+            <div class="mb-3"><input class="form-control" type="text" name="username" placeholder="Username" required="" value='{{ username }}'></div>
+            {% if errmsg2 %} <div style='color:red;'>{{ errmsg2 }}</div> {% endif %}
+            <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email" required="" value='{{ email }}'></div>
+            <div class="mb-3"><input class="form-control" type="password" name="password1" placeholder="Password" required="" value='{{ password1 }}'></div>
+            {% if errmsg3 %} <div style='color:red;'>{{ errmsg3 }}</div> {% endif %}
+            <div class="mb-3"><input class="form-control" type="password" name="password2" placeholder="Repeat your Password" required="" value='{{ password2 }}'></div> 
+            <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit" style="background: var(--bs-blue);color: var(--bs-white);">Sign up</button></div><a class="forgot" href="../login">Have an account? Login here.</a>
+        </form>
+    </section>
+    <footer class="footer text-center" style="height: 207.8px;">
+        <div></div>
+        <div class="container">
+            <ul class="list-inline mb-5">
+                <li class="list-inline-item">&nbsp;<a class="link-light social-link rounded-circle" href="https://github.com/duolaCmengaa/database.git" style="background: var(--bs-05);"><i class="icon-social-github"></i></a></li>
+            </ul>
+            <p class="text-muted mb-0 small">Copyright &nbsp;© Mcqueen DuolaCmengaa Joyce 2024</p>
+        </div><a class="js-scroll-trigger scroll-to-top rounded" href="#page-top"><i class="fa fa-angle-up"></i></a>
+    </footer>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/bs-init.js' %}"></script>
+    <script src="{% static 'assets/js/stylish-portfolio.js' %}"></script>
+    
+</body>
+
+</html>

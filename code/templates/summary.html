@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Order Management{% endblock %}
+{% block navibar %}
+<style>
+    .hidden-row {
+        display: none;
+    }
+</style>
+<!-- Navibar 部分代码保持不变 -->
+<div id="page-top"></div>
+<nav class="navbar navbar-dark navbar-expand-md sticky-top shadow-lg"
+     style="color: rgb(255,255,255);opacity: 1;background: var(--bs-secondary);">
+    <div class="container">
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"
+                style="background-color: rgb(255,255,255);color: #ffffff;"><span class="visually-hidden">Toggle navigation</span><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1"
+             style="color: rgb(255,255,255);background-color: rgb(255,255,255);"><a href="/home/"><img
+                src="{% static 'assets/img/icon.png' %}" style="width: 44px;"></a>
+            <ul class="navbar-nav flex-grow-1 justify-content-between"
+                style="color: rgb(156,156,156);background: var(--bs-secondary);">
+                <li class="nav-item"></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;"
+                                        href="/users/">Users</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;"
+                                        href="/publishers/">Publishers</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;"
+                                        target="_top" href="/writers/">Writers</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;"
+                                        href="/books/">Books</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-grey);font-size: 20px;">Orders</a>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse" 
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;" href="/store/">Stores</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse" style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;" href="/supplier/">Suppliers</a></li>
+
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: #ff5c5c;font-size: 20px;"
+                                        href="/accounts/logout/"><i class="fa fa-user" style="color: #ff5c5c;"></i>&nbsp;<button
+                        class="btn btn-primary" type="button" style="background: var(--bs-red);color: var(--bs-white);">
+                    Log out
+                </button>
+                </a></li>
+                <li class="nav-item"><a class="nav-link active"></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block filter %}
+<section style="padding: 70px; background: url('{% static 'assets/img/portfolio-2.jpg' %}') center / cover no-repeat;">
+    <div class="container-fluid" style="width: 100%; background: radial-gradient(var(--bs-04), var(--bs-04) 100%); text-align: center;">
+        <div class="filter" style="text-align: center;">
+            <form method="get" id="myform">
+                <br>
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <label for="start_date" style="font-family: ABeeZee, sans-serif; color: var(--bs-white); font-size: 15px;">Start Date:</label>
+                        <input class="form-control" type="date" id="start_date" name="start_date" value="{{ start_date }}" style="width: 100%;">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="end_date" style="font-family: ABeeZee, sans-serif; color: var(--bs-white); font-size: 15px;">End Date:</label>
+                        <input class="form-control" type="date" id="end_date" name="end_date" value="{{ end_date }}" style="width: 100%;">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="store_id" style="font-family: ABeeZee, sans-serif; color: var(--bs-white); font-size: 15px;">Store:</label>
+                        <select class="form-select" id="store_id" name="store_id" style="width: 100%;">
+                            <option value="">All Stores</option>
+                            {% for store in stores %}
+                            <option value="{{ store.id }}" {% if store.id == selected_store %}selected{% endif %}>{{ store.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <button class="btn btn-primary w-100" type="submit" style="background: var(--bs-success);">Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Order Summary</h1>
+                        <p class="card-text text-center">Total Orders Number: {{ total_orders }}</p>
+                        <p class="card-text text-center">Total Number of Books Sold: {{ total_books }}</p>
+                        <p class="card-text text-center">Total Revenue: {{ total_revenue }}</p>
+                    </div>
+                </div>
+                
+                <!-- Sales by Store Section -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h2 class="card-title">Sales by Store</h2>
+                        <table id="salesTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Store</th>
+                                    <th>Total Sale Numbers</th>
+                                    <th>Total sales amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for sale in sales_by_store %}
+                                <tr class="sales-row">
+
+                                    <td><a href="/store/?name={{sale.store__name}}" style="color: var(--bs-yellow); text-decoration: none;">{{sale.store__name}}</a></td>
+
+                                    <td>{{ sale.total_counts }}</td>
+                                    <td>{{ sale.total_money }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                        </div>
+
+
+
+                            
+                                    <!-- Orders by Book Section -->
+                                    <div class="card mt-4">
+                                        <div class="card-body">
+                                            <h2 class="card-title">Number of Book Purchased</h2>
+                                            <table id="ordersTable" class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Book Name</th>
+                                                        <th>Purchased amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for item1 in booksale %}
+                                                    <tr class="orders-row">
+                                                        <td><a href="/books/?title={{ item1.book__title }}" style="color: var(--bs-yellow); text-decoration: none;">{{ item1.book__title }}</a></td>
+                                                        <td>{{ item1.total_sold }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <!-- Orders by User Section -->
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h2 class="card-title">Number of User Purchases</h2>
+                                <table id="ordersTable" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Total Orders</th>
+                                            <th>Purchase amount</th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in orders_by_user %}
+                                        <tr class="orders-row">
+
+                                            <td><a href="/users/?name={{item.user__name}}" style="color: var(--bs-yellow); text-decoration: none;">{{item.user__name}}</a></td>
+                                            <td>{{ item.totalnum }}</td>
+                                            <td>{{ item.total_money1 }}</td>
+                                            
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="/orders/" class="btn btn-primary">Back to Orders</a>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </section>
+                        {% endblock %}
+                        {% block scripts %}
+                        <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+                        <script src="{% static 'assets/js/stylish-portfolio.js' %}"></script>
+                        <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // Function to handle pagination for Sales by Store
+                            const salesTable = document.getElementById('salesTable');
+                            const salesRows = salesTable.querySelectorAll('.sales-row');
+                        
+                            let salesPage = 0;
+                            const salesPerPage = 20;
+                        
+                            function showSalesRows() {
+                                salesRows.forEach((row, index) => {
+                                    if (index >= salesPage * salesPerPage && index < (salesPage + 1) * salesPerPage) {
+                                        row.style.display = 'table-row';
+                                    } else {
+                                        row.style.display = 'none';
+                                    }
+                                });
+                            }
+                        
+                            showSalesRows();
+                        
+                            // Function to handle pagination for Orders by User
+                            const ordersTable = document.getElementById('ordersTable');
+                            const ordersRows = ordersTable.querySelectorAll('.orders-row');
+                        
+                            let ordersPage = 0;
+                            const ordersPerPage = 20;
+                        
+                            function showOrdersRows() {
+                                ordersRows.forEach((row, index) => {
+                                    if (index >= ordersPage * ordersPerPage && index < (ordersPage + 1) * ordersPerPage) {
+                                        row.style.display = 'table-row';
+                                    } else {
+                                        row.style.display = 'none';
+                                    }
+                                });
+                            }
+                        
+                            showOrdersRows();
+                        });
+                        </script>
+                        {% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Edit Book{% endblock %}
+{% block navibar %}
+ <div id="page-top"></div>
+ <nav class="navbar navbar-dark navbar-expand-md sticky-top shadow-lg" style="color: rgb(255,255,255);opacity: 1;background: var(--bs-secondary);">
+        <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1" style="background-color: rgb(255,255,255);color: #ffffff;"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);background-color: rgb(255,255,255);"><a href="/home/"><img src="{% static 'assets/img/icon.png' %}" style="width: 44px;"></a>
+                <ul class="navbar-nav flex-grow-1 justify-content-between" style="color: rgb(156,156,156);background: var(--bs-secondary);">
+                    <li class="nav-item"></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;"
+                                        href="/users/">Users</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;"
+                                        href="/publishers/">Publishers</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;"
+                                        target="_top" href="/writers/">Writers</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;"
+                                        href="/books/">Books</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse"
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-grey);font-size: 20px;">Orders</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse" 
+                                        style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;" href="/store/">Stores</a></li>
+                <li class="nav-item"><a class="nav-link scroll" data-bss-hover-animate="pulse" style="font-family: ABeeZee, sans-serif;color: var(--bs-white);font-size: 20px;" href="/supplier/">Suppliers</a></li>
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" style="font-family: ABeeZee, sans-serif;color: #ff5c5c;font-size: 20px;" href="/accounts/logout/"><i class="fa fa-user" style="color: #ff5c5c;"></i>&nbsp;<button class="btn btn-primary" type="button" style="background: var(--bs-red);color: var(--bs-white);">Log out</button></a></li>
+                <li class="nav-item"><a class="nav-link active"></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+{% block edit %}
+<section style="padding: 70px; background: url(&quot;{% static 'assets/img/books2.jpg' %}&quot;) center / cover no-repeat;">
+    <div class="container-fluid" style="padding: 50px; width: 70%; background: var(--bs-white);">
+        <section class="contact-clean">
+            <form method="post">
+                {% if error %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endif %}
+
+                {% csrf_token %}
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                    <div style="width: 100%; max-width: 600px;" align = "center">
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" value="{{ order.date }}" required>
+                    </div>
+
+                    <div style="width: 100%; max-width: 600px;">
+                        <label for="user">User:</label>
+                        <select id="user" name="user" required style="width: 100%;">
+                            {% for user in users %}
+                                <option value="{{ user.name }}" {% if user.id == order.user_id %}selected{% endif %}>{{ user.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div style="width: 100%; max-width: 600px;">
+                        <label for="store">Store:</label>
+                        <select id="store" name="store" required style="width: 100%;">
+                            {% for store in stores %}
+                                <option value="{{ store.id }}" {% if store.id == order.store_id %}selected{% endif %}>{{ store.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div style="width: 100%; max-width: 600px;">
+                        <label for="confirm">Confirmation:</label>
+                        <select id="confirm" name="confirm" required style="width: 100%;">
+                            <option value="Y" {% if order.confirm == 'Y' %}selected{% endif %}>Yes</option>
+                            <option value="N" {% if order.confirm == 'N' %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+                </div>
+
+                    <div id="books">
+                        {% for detail in details %}
+                            <div class="book-detail" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                                <div>
+                                    <label for="book_{{ detail.book.id }}">Book:</label>
+                                    <select id="book_{{ detail.book.id }}" name="book" required>
+                                        {% for book in books %}
+                                            <option value="{{ book.id }}" {% if book.id == detail.book_id %}selected{% endif %}>{{ book.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="count_{{ detail.book.id }}">Count:</label>
+                                    <input type="number" id="count_{{ detail.book.id }}" name="count_{{ detail.book.id }}" value="{{ detail.count }}" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="price_{{ detail.book.id }}">Price:</label>
+                                    <input type="number" id="price_{{ detail.book.id }}" name="price_{{ detail.book.id }}" value="{{ detail.price }}" required>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</section>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/stylish-portfolio.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+    <script src="{% static 'assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-1.js' %}"></script>
+{% endblock %}
