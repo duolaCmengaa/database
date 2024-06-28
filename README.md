@@ -142,7 +142,7 @@ Quit the server with CTRL-BREAK.
 
 ### 3.超级管理员
 
-通过连接http://127.0.0.1:8000/admin，进入超级管理员登录界面。通过输入在“python manage.py createsuperuser”命令后设置的账户和密码，进入超管控制面板。在超级管理员控制面板可以对管理员、书籍、门店、供货商等进行编辑。
+通过连接![http://127.0.0.1:8000/admin]http://127.0.0.1:8000/admin，进入超级管理员登录界面。通过输入在“python manage.py createsuperuser”命令后设置的账户和密码，进入超管控制面板。在超级管理员控制面板可以对管理员、书籍、门店、供货商等进行编辑。
 
 ![image](https://github.com/duolaCmengaa/database/assets/145974277/09204a39-dcab-4f7e-9c92-d8d30dd172a2)
 
