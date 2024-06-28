@@ -1,6 +1,10 @@
 # BookStoreDB
 
-Project for 数据库及实现
+网上综合书店销售数据库
+
+# Target
+设计并实现一个综合性的数据库系统，用于管理连锁销售公司的门店、商品（包
+括图书）、供货商、客户（包括会员）、销售记录及统计数据。
 
 - [BookStoreDB](#bookstoredb)
   - [Versions](#versions)
@@ -200,13 +204,12 @@ Quit the server with CTRL-BREAK.
 
 ## Contributors
 
-- 乔一宸 1/3
-- 马骎 1/3
-- 李波 1/3
+- 乔一宸 
+- 马骎 
+- 李波 
 
 ## Database Schema
 
-因为期中汇报老师说不需要添加其他类别的商品，故本数据库不包含其他类别的商品，只有图书
 
 ### Login_user
 
