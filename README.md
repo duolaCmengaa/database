@@ -135,11 +135,10 @@ Quit the server with CTRL-BREAK.
 
 如果没有账号可以先进行注册，填写完id、邮箱、密码后进行注册，注册完成后返回登录界面，已有账号的用户可以直接进行登录。
 
-<center class="half">
-    ![image](https://github.com/duolaCmengaa/database/assets/145974277/47aa5654-40be-4892-9574-bcedd5878adb)
+![image](https://github.com/duolaCmengaa/database/assets/145974277/47aa5654-40be-4892-9574-bcedd5878adb)
   
-    ![image](https://github.com/duolaCmengaa/database/assets/145974277/0d378e31-1bd7-424a-b334-faf1e8313f60)
-</center>
+![image](https://github.com/duolaCmengaa/database/assets/145974277/0d378e31-1bd7-424a-b334-faf1e8313f60)
+
 
 ### 3.超级管理员
 
