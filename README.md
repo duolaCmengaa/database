@@ -206,6 +206,8 @@ Quit the server with CTRL-BREAK.
 
 ## Database Schema
 
+因为期中汇报老师说不需要添加其他类别的商品，故本数据库不包含其他类别的商品，只有图书
+
 ### Login_user
 
 | Field    | Type         | Null | Key | Default | Extra          |
@@ -352,6 +354,69 @@ The URL tree should be constructed as follows:
     
 ```
 
+-----
+
+###  后端 API 说明
+
+本项目是基于Django来实现的，
+
+对于一个综合书店销售数据库来说，整个系统的后端 API 说明可以概述如下：
+
+文件说明：
+
+- \__init__.py
+
+用于将包含的目录标记为一个 Python 包。通常为空，但可以用于包的初始化设置。
+
+- admin.py
+
+注册数据库模型以便通过 Django 管理界面进行管理和操作。这可以包括书籍、订单、客户、出版社等模型。
+
+- apps.py
+
+配置应用程序的元数据，如应用名称和配置类，确保应用程序正确加载和配置。
+
+- models.py
+
+定义数据库模型，描述书店的各种数据结构。这些模型包括书籍、作者、分类、订单、客户、出版社等。每个模型对应数据库中的一张表，包含字段和数据类型定义。
+
+- urls.py
+
+定义 URL 路由，将不同的 URL 路径映射到相应的视图函数或类。这使得系统能够正确处理不同的 HTTP 请求，如查看书籍详情、下订单等。
+
+- views.py
+
+包含处理请求的视图函数或类，这些函数或类负责处理来自前端的请求并返回相应的响应。它们执行业务逻辑，如查询数据库、处理表单数据、返回 HTML 页面或 JSON 数据。
+
+
+###  数据库访问逻辑
+
+数据库访问逻辑主要通过 Django 的 ORM 实现，以下是一些关键点：
+
+- 模型查询
+
+使用模型类来查询数据库。例如，查询所有书籍、某个分类下的书籍或某个客户的订单等。
+
+模型实例操作
+
+- 创建、更新和删除模型实例。
+
+例如，添加新书籍、更新订单状态、删除客户信息等。
+
+- 关联查询
+
+处理模型之间的关系查询。例如，获取某本书的作者信息，获取某个订单的所有书籍明细等。
+
+- 事务管理
+
+在处理复杂操作时，使用数据库事务确保数据一致性。例如，在下订单时，同时减少库存数量和记录订单信息，确保两个操作要么同时成功要么同时失败。
+
+
+###  前端说明：
+
+我们使用的是Bootstrap框架，Bootstrap 是一个用于开发响应式和移动优先网页的前端框架， 包含了大量的 CSS 和 JavaScript 组件，使得开发者可以快速构建现代、响应式的网站和应用。
+我们使用template来渲染动态内容。利用Bootstrap进行响应式和现代化的UI设计。包含导航(navigation)和交互元素以与后端数据进行交互。
+
 ------
 
 ## Design Documents
@@ -373,7 +438,7 @@ The URL tree should be constructed as follows:
 ### 2  模型图
 
 #### 2.1 数据流图
-<img src="F:\FDU\Database\BookStoreDB-master\数据流.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/c7d70a43-98e6-4a2b-8200-13f77af92dd1)
 
 
 #### 2.2  数据字典
@@ -435,7 +500,7 @@ The URL tree should be constructed as follows:
 
 #### 2.3  E-R图
 
-<img src="F:\FDU\Database\BookStoreDB-master\E-R.png" style="zoom:67%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/93708174-befc-49b4-a228-ca080977de51)
 
 ### 3   功能划分
 
