@@ -71,15 +71,15 @@ BookStoreDB works on Windows 10&11. Chrome is recommended to have the best exper
 
 ```
 git clone https://github.com/duolaCmengaa/database.git
-
+cd database-main
 ```
 2. Enter the root file "BookStoreDB/" and install dependencies:
 
-  ```cmd
+  ```
   pip install -r requirements.txt
   ```
 
-3. Set up database and replace my username and password in project root file "MyBookDB/settings.py" containing something like:
+3. Set up database and replace my username and password in project root file "BookStoreDB/settings.py" containing something like:
 
   ```python
 DATABASES = {
@@ -119,6 +119,7 @@ Quit the server with CTRL-BREAK.
 ```
 
 7. Enter server:  http://127.0.0.1:8000/
+   
 8. Database being polluted, you may:
 
 ```python
@@ -130,20 +131,20 @@ Quit the server with CTRL-BREAK.
 
 进入BookStoreDB导航页，点击Start按钮，进如用户注册/登录界面。
 
-<img src="F:\FDU\Database\MyBookDB-master\导航页.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/4c2bc4a6-c3ce-4844-810b-1ff36024d0ae)
 
 如果没有账号可以先进行注册，填写完id、邮箱、密码后进行注册，注册完成后返回登录界面，已有账号的用户可以直接进行登录。
 
 <center class="half">
-    <img src="F:\FDU\Database\MyBookDB-master\登录.png" style="zoom:30%;" />
-    <img src="F:\FDU\Database\MyBookDB-master\注册.png" style="zoom:30%"  />
+    ![image](https://github.com/duolaCmengaa/database/assets/145974277/47aa5654-40be-4892-9574-bcedd5878adb)
+    ![image](https://github.com/duolaCmengaa/database/assets/145974277/0d378e31-1bd7-424a-b334-faf1e8313f60)
 </center>
 
 ### 3.超级管理员
 
 通过连接http://127.0.0.1:8000/admin，进入超级管理员登录界面。通过输入在“python manage.py createsuperuser”命令后设置的账户和密码，进入超管控制面板。在超级管理员控制面板可以对管理员、书籍、门店、供货商等进行编辑。
 
-<img src="F:\FDU\Database\MyBookDB-master\超管面板.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/09204a39-dcab-4f7e-9c92-d8d30dd172a2)
 
 
 
@@ -151,7 +152,7 @@ Quit the server with CTRL-BREAK.
 
 在BookStoreDB主页，可以获取新订单，每次获得的订单数在5-10之间。此外点击不同标签页可以获取不同信息。
 
-<img src="F:\FDU\Database\MyBookDB-master\主页.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/dda8bf01-1727-4f48-9edc-14f6bb36704f)
 
 
 
@@ -159,7 +160,7 @@ Quit the server with CTRL-BREAK.
 
 在Users标签页，可以浏览当前所有用户，用户分为VIP和普通用户，可以对每个用户进行编辑和删除。除此之外，可以通过输入用户id、地址、邮箱、姓名等进行查找，并可通过ID、姓名的等对用户进行排序（升序/降序）。
 
-<img src="F:\FDU\Database\MyBookDB-master\User.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/ea1320d8-3bd9-495a-b655-134d8be9b3d8)
 
 #### 4.2 Publishers
 
@@ -169,7 +170,7 @@ Quit the server with CTRL-BREAK.
 
 在Writers页面可以查看作者信息，包含作家姓名和类别（作者/译者）。可以通过姓名和ID进行查找和排序、根据作家类别进行分类。同时可以对每条作家信息进行编辑和删除。
 
-<img src="F:\FDU\Database\MyBookDB-master\Writers.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/ba596d5f-a955-49f7-bb5d-af855f0ac1a0)
 
 #### 4.4 Books
 
@@ -179,23 +180,23 @@ Quit the server with CTRL-BREAK.
 
 在Orders标签页可以看到每条订单的ID、订单日期、门店、订单客户、订单书籍以及相对应的数量和单价。每条订单可以被确认，未被确认的订单可以被修改或删除以防止恶意订单，被确认的订单会显示确认订单的用户名。可以通过OrderID、订单客户、订单日期、门店名以及确认订单的用户名进行查找，通过是否被确认进行分类筛选，以及根据各个指标对订单进行排序。
 
-<img src="F:\FDU\Database\MyBookDB-master\Order.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/a2fdceb3-58c4-4d3f-bf13-a28a774a807d)
 
 除此之外，可以通过“Order Summary and Analysis”按钮进入订单汇总界面。里面展示时间段内的订单总数、售出图书总量以及总销售额，同时会显示在时间段内每个门店的总图书销量和销售额，图书的销量排行榜，用户的购买量的排行榜，可以选择汇总的开始、结束日期以进行筛选。
 
-<img src="F:\FDU\Database\MyBookDB-master\Order_summary.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/b64532b9-19bd-45d0-87b5-38845707d756)
 
 #### 4.6 Stores
 
 在Stores标签页可以看到每个门店的ID、名称、地址、联系电话、经理姓名和对应供货商。可以通过门店名、地址、联系电话和经理姓名对门店进行查找和排序。同时可以对每个门店的信息进行编辑和删除。
 
-<img src="F:\FDU\Database\MyBookDB-master\Stores.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/91e037a5-8500-43ce-8168-e4341e0680eb)
 
 #### 4.7 Suppliers
 
 在Suppliers标签页可以看到每个供货商的ID、名称、联系电话、电子邮箱、联系人和地址。可以通过供货商名称、联系电话、联系人、电子邮件进行查找和排序。可以对每条门店的信息进行单独编辑和删除。
 
-<img src="F:\FDU\Database\MyBookDB-master\Suppliers.png" style="zoom:50%;" />
+![image](https://github.com/duolaCmengaa/database/assets/145974277/01619d80-d7f9-4838-a641-2e5a47f0449b)
 
 ## Contributors
 
@@ -372,7 +373,7 @@ The URL tree should be constructed as follows:
 ### 2  模型图
 
 #### 2.1 数据流图
-<img src="F:\FDU\Database\MyBookDB-master\数据流.png" style="zoom:50%;" />
+<img src="F:\FDU\Database\BookStoreDB-master\数据流.png" style="zoom:50%;" />
 
 
 #### 2.2  数据字典
@@ -434,7 +435,7 @@ The URL tree should be constructed as follows:
 
 #### 2.3  E-R图
 
-<img src="F:\FDU\Database\MyBookDB-master\E-R.png" style="zoom:67%;" />
+<img src="F:\FDU\Database\BookStoreDB-master\E-R.png" style="zoom:67%;" />
 
 ### 3   功能划分
 
