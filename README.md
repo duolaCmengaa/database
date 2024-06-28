@@ -137,6 +137,7 @@ Quit the server with CTRL-BREAK.
 
 <center class="half">
     ![image](https://github.com/duolaCmengaa/database/assets/145974277/47aa5654-40be-4892-9574-bcedd5878adb)
+  
     ![image](https://github.com/duolaCmengaa/database/assets/145974277/0d378e31-1bd7-424a-b334-faf1e8313f60)
 </center>
 
