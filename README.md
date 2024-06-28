@@ -67,13 +67,19 @@ BookStoreDB works on Windows 10&11. Chrome is recommended to have the best exper
 
 ### 1 安装与部署
 
-1. Enter the root file "BookStoreDB/" and install dependencies:
+1. Git clone through Git CMD or download the project through Github Desktop to your direction:
+
+```
+git clone https://github.com/duolaCmengaa/database.git
+
+```
+2. Enter the root file "BookStoreDB/" and install dependencies:
 
   ```cmd
   pip install -r requirements.txt
   ```
 
-2. Set up database and replace my username and password in project root file "MyBookDB/settings.py" containing something like:
+3. Set up database and replace my username and password in project root file "MyBookDB/settings.py" containing something like:
 
   ```python
 DATABASES = {
@@ -88,18 +94,18 @@ DATABASES = {
 }
   ```
 
-3. Apply migrations and create superuser:
+4. Apply migrations and create superuser:
   ```cmd
   python manage.py migrate
   python manage.py createsuperuser # Not necessarily required.
   ```
 
-4. To avoid starting the system with empty database, run in command line:
+5. To avoid starting the system with empty database, run in command line:
 ```cmd
   python data.py
 ```
 
-5. Start server at local host:
+6. Start server at local host:
 ```cmd
   python manage.py runserver # Following message will occur.
 ```
@@ -112,8 +118,8 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
 
-6. Enter server:  http://127.0.0.1:8000/
-7. Database being polluted, you may:
+7. Enter server:  http://127.0.0.1:8000/
+8. Database being polluted, you may:
 
 ```python
   python manage.py flush
